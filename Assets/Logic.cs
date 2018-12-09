@@ -49,33 +49,35 @@ using System.ComponentModel;
                 DateTime end = DateTime.UtcNow;
 
                 int minutes = (int)Math.Ceiling((end - start).TotalMinutes);
-                int lowerValue = minutes / 10;
-                double days = Math.Round((end - start).TotalDays, MidpointRounding.ToEven);
+                int periodsElapsed = minutes / 10;
+                
 
-                age = age - (int)days;
+                
+                
+                int endHungry = Int32.Parse(pet.statsDown(hungry.ToString(), periodsElapsed,6));
 
                 int startHungry = hungry;
-                int endHungry = Int32.Parse(pet.statsDown(hungry.ToString(), lowerValue,6));
-            /*    int startValueHungry = (startHungry < 30) ? startHungry : 30;
-                int hungryNumber = (startValueHungry - endHungry) / 6;
-                if (hungryNumber == 0)
-                {
-                    hungryNumber = startValueHungry / 6;
-                }
+            /*      int startValueHungry = (startHungry < 30) ? startHungry : 30;
+                  int hungryNumber = (startValueHungry - endHungry) / 6;
+                  if (hungryNumber == 0)
+                  {
+                      hungryNumber = startValueHungry / 6;
+                  }
 
-                int startEnergy = energy;
-          /*      int startValueEnergy = (startEnergy < 30) ? startEnergy : 30;
-                int energyNumber = (startValueEnergy - endEnergy) / 3;
-                if (energyNumber == 0)
-                {
-                    energyNumber = startValueEnergy / 3;
-                }
+                  int startEnergy = energy;
+            /*      int startValueEnergy = (startEnergy < 30) ? startEnergy : 30;
+                  int energyNumber = (startValueEnergy - endEnergy) / 3;
+                  if (energyNumber == 0)
+                  {
+                      energyNumber = startValueEnergy / 3;
+                  }
 
-                health = Int32.Parse(pet.statsDown(health.ToString(), Math.Max(hungryNumber, energyNumber),4));
-                */
-            int endEnergy = Int32.Parse(pet.statsDown(energy.ToString(), lowerValue, 3));
+                  health = Int32.Parse(pet.statsDown(health.ToString(), Math.Max(hungryNumber, energyNumber),4));
+                  */
+            int endEnergy = Int32.Parse(pet.statsDown(energy.ToString(), periodsElapsed, 3));
+            happy = Int32.Parse(pet.statsDown(happy.ToString(), periodsElapsed,5));
 
-            happy = Int32.Parse(pet.statsDown(happy.ToString(), lowerValue,5));
+            age += calculateDays(start, end);
 
             return new string[] {endHungry.ToString(), happy.ToString(), health.ToString(), endEnergy.ToString(), allText[0], age.ToString(), color.ToString()};
             }
@@ -85,6 +87,18 @@ using System.ComponentModel;
             return new string[] { };
             }
         }
+
+    private int calculateDays(DateTime start, DateTime end)
+    {
+        double days = Math.Abs(Math.Round((end - start).TotalDays, MidpointRounding.ToEven));
+
+        if (days < 0)
+        {
+            days = 0;
+        }
+
+        return (int)days;
+    }
 		
         public void NewGame(string name, int color)
         {
