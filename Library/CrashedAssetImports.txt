@@ -1,1 +1,0 @@
-Assets/Prefabs/characters/Red Character Sprite.prefab
