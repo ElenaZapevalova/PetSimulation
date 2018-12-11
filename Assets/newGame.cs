@@ -20,11 +20,22 @@ public class newGame : MonoBehaviour {
     {
         if (Instance != null)
         {
+            // DestroyImmediate(gameObject);
             return;
         }
         Instance = this;
+        //  DontDestroyOnLoad(gameObject);
     }
 
+    // Use this for initialization
+    void Start () {
+		
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		
+	}
     public void selectColor(int i)
     {
         colorNumber = i;
@@ -33,7 +44,6 @@ public class newGame : MonoBehaviour {
     public void eventPlay()
     {
         Logic logic = new Logic();
-        Debug.Log(inputName.text);
         logic.NewGame(inputName.text, colorNumber);
         SceneManager.LoadScene("Game");
     }
