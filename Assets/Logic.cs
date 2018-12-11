@@ -74,6 +74,7 @@ using System.ComponentModel;
 
                   health = Int32.Parse(pet.statsDown(health.ToString(), Math.Max(hungryNumber, energyNumber),4));
                   */
+            health = Int32.Parse(pet.statsDown(health.ToString(), periodsElapsed, 4);
             int endEnergy = Int32.Parse(pet.statsDown(energy.ToString(), periodsElapsed, 3));
             happy = Int32.Parse(pet.statsDown(happy.ToString(), periodsElapsed,5));
 
